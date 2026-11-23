@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXORA AI | Building a Smarter Future with Artificial Intelligence</title>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & THEME DESIGN TOKENS
+           ========================================================================== */
+        :root {
+            --bg-primary: #080B16;
+            --bg-secondary: #101629;
+            --bg-card: rgba(16, 22, 41, 0.65);
+            --bg-card-hover: rgba(24, 33, 60, 0.85);
+            
+            --accent-purple: #7C3AED;
+            --accent-purple-glow: rgba(124, 58, 237, 0.35);
+            --accent-cyan: #06B6D4;
+            --accent-cyan-glow: rgba(6, 182, 212, 0.3);
+            --accent-blue: #3B82F6;
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #E2E8F0;
+            --text-muted: #A1A1AA;
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(124, 58, 237, 0.4);
+            
+            --gradient-primary: linear-gradient(135deg, #7C3AED 0%, #3B82F6 50%, #06B6D4 100%);
+            --gradient-text: linear-gradient(90deg, #FFFFFF 0%, #C4B5FD 45%, #67E8F9 100%);
+            --gradient-surface: linear-gradient(180deg, rgba(124, 58, 237, 0.08) 0%, rgba(8, 11, 22, 0) 100%);
+            
+            --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-full: 9999px;
+            
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE STYLES
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(124, 58, 237, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 35%, rgba(6, 182, 212, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 45%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Subtle Background Grid Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ==========================================================================
+           3. UTILITY & LAYOUT CLASSES
+           ========================================================================== */
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 64px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(124, 58, 237, 0.14);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            border-radius: var(--radius-full);
+            color: #C4B5FD;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-badge::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--accent-cyan);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.85rem);
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.075rem;
+            line-height: 1.7;
+        }
+
+        .gradient-text {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .demo-disclaimer {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            border-radius: var(--radius-full);
+        }
+
+        /* ==========================================================================
+           4. BUTTONS
+           ========================================================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 28px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: #FFFFFF;
+            box-shadow: 0 8px 25px -4px var(--accent-purple-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px -4px rgba(124, 58, 237, 0.55);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 9px 20px;
+            font-size: 0.875rem;
+        }
+
+        /* ==========================================================================
+           5. STICKY NAVIGATION BAR (Pure CSS Responsive Toggle Included)
+           ========================================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 11, 22, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-purple-glow);
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 0.925rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            padding: 6px 0;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            transition: width var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Pure CSS Mobile Menu Checkbox Hack */
+        #nav-toggle {
+            display: none;
+        }
+
+        .nav-toggle-label {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle-label span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition-fast);
+        }
+
+        /* ==========================================================================
+           6. HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding: 90px 0 110px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #67E8F9;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 3.85rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin-bottom: 36px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        /* Illustrative Sample Statistics Cards */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            padding: 18px 20px;
+            border-radius: var(--radius-md);
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 1.65rem;
+            font-weight: 800;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .stat-note {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Abstract AI Visual Illustration & Floating CSS Elements */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-orb-container {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glow-backdrop {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(6, 182, 212, 0.25) 45%, transparent 72%);
+            filter: blur(35px);
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+        }
+
+        .neural-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(124, 58, 237, 0.45);
+        }
+
+        .ring-1 {
+            width: 96%;
+            height: 96%;
+            animation: spinSlow 28s linear infinite;
+        }
+
+        .ring-2 {
+            width: 74%;
+            height: 74%;
+            border: 1px solid rgba(6, 182, 212, 0.35);
+            animation: spinReverse 20s linear infinite;
+        }
+
+        .ring-3 {
+            width: 52%;
+            height: 52%;
+            border: 1px dashed rgba(255, 255, 255, 0.25);
+            animation: spinSlow 14s linear infinite;
+        }
+
+        .neural-core {
+            position: relative;
+            width: 170px;
+            height: 170px;
+            border-radius: 32px;
+            background: linear-gradient(145deg, rgba(24, 33, 60, 0.9), rgba(8, 11, 22, 0.95));
+            border: 1px solid rgba(124, 58, 237, 0.55);
+            box-shadow: 
+                0 0 50px rgba(124, 58, 237, 0.4),
+                inset 0 0 25px rgba(6, 182, 212, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .floating-chip {
+            position: absolute;
+            background: rgba(16, 22, 41, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(12px);
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+            z-index: 3;
+        }
+
+        .chip-top {
+            top: 10%;
+            right: 4%;
+            animation: floatY 5s ease-in-out infinite;
+        }
+
+        .chip-bottom {
+            bottom: 12%;
+            left: 2%;
+            animation: floatY 6s ease-in-out infinite reverse;
+        }
+
+        .chip-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); opacity: 0.75; }
+            100% { transform: scale(1.06); opacity: 1; }
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spinReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ==========================================================================
+           7. ABOUT THE COMPANY SECTION
+           ========================================================================== */
+        .about-section {
+            background: var(--gradient-surface);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image-wrap {
+            position: relative;
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(6, 182, 212, 0.25));
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+        }
+
+        .about-image-wrap img {
+            border-radius: calc(var(--radius-lg) - 6px);
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+        }
+
+        .about-badge-card {
+            position: absolute;
+            bottom: 28px;
+            right: -18px;
+            background: rgba(16, 22, 41, 0.92);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            backdrop-filter: blur(14px);
+            padding: 16px 22px;
+            border-radius: var(--radius-md);
+            max-width: 240px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-badge-card strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+
+        .about-badge-card span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .about-lead {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 28px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            transition: border-color var(--transition-smooth), transform var(--transition-smooth);
+        }
+
+        .pillar-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-3px);
+        }
+
+        .pillar-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #FFFFFF;
+        }
+
+        .pillar-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .why-ai-box {
+            background: rgba(124, 58, 237, 0.08);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 18px 22px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .why-ai-box h3 {
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            color: var(--accent-cyan);
+        }
+
+        .why-ai-box p {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        /* ==========================================================================
+           8. AI PRODUCTS SECTION
+           ========================================================================== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(14px);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+
+        .product-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+
+        .product-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-glow);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .product-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.22), rgba(6, 182, 212, 0.22));
+            border: 1px solid rgba(124, 58, 237, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+        }
+
+        .concept-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .product-card h3 {
+            font-size: 1.45rem;
+            margin-bottom: 12px;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            margin-bottom: 22px;
+            line-height: 1.65;
+        }
+
+        .feature-list {
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .feature-list li svg {
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+
+        /* ==========================================================================
+           9. AI APPLICATIONS SECTION
+           ========================================================================== */
+        .applications-section {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .app-card {
+            background: rgba(8, 11, 22, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 30px 26px;
+            transition: all var(--transition-smooth);
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(6, 182, 212, 0.45);
+            box-shadow: 0 15px 35px rgba(6, 182, 212, 0.12);
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .app-card h3 {
+            font-size: 1.22rem;
+            margin-bottom: 10px;
+        }
+
+        .app-card p {
+            font-size: 0.93rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ==========================================================================
+           10. TECHNOLOGY SECTION
+           ========================================================================== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .tech-card {
+            background: linear-gradient(160deg, rgba(16, 22, 41, 0.8), rgba(8, 11, 22, 0.9));
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            position: relative;
+            transition: all var(--transition-smooth);
+        }
+
+        .tech-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(124, 58, 237, 0.18);
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .tech-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(124, 58, 237, 0.16);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #C4B5FD;
+            flex-shrink: 0;
+        }
+
+        .tech-card h3 {
+            font-size: 1.15rem;
+        }
+
+        .tech-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ==========================================================================
+           11. TEAM SECTION
+           ========================================================================== */
+        .team-section {
+            background: var(--gradient-surface);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            text-align: center;
+            transition: all var(--transition-smooth);
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .team-img-wrap {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .team-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .team-img-wrap img {
+            transform: scale(1.06);
+        }
+
+        .team-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(8, 11, 22, 0.82);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            color: var(--accent-cyan);
+        }
+
+        .team-info {
+            padding: 24px 20px;
+        }
+
+        .team-info h3 {
+            font-size: 1.18rem;
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #C4B5FD;
+            margin-bottom: 12px;
+        }
+
+        .team-bio {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           12. CONTACT SECTION
+           ========================================================================== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .contact-info h2 {
+            font-size: 2.15rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-info > p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .contact-item-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+
+        .contact-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .contact-item span {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 13px 16px;
+            background: rgba(8, 11, 22, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .form-control::placeholder {
+            color: #64748B;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.18);
+        }
+
+        textarea.form-control {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* ==========================================================================
+           13. FOOTER
+           ========================================================================== */
+        .footer {
+            background: #05070E;
+            border-top: 1px solid var(--border-subtle);
+            padding: 64px 0 32px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-top: 16px;
+            max-width: 320px;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom {
+            padding-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           14. RESPONSIVE BREAKPOINTS (Tablet & Mobile)
+           ========================================================================== */
+        @media (max-width: 1024px) {
+            .hero-grid,
+            .about-grid,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .ai-orb-container {
+                max-width: 340px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .apps-grid,
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .nav-toggle-label {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(8, 11, 22, 0.98);
+                border-bottom: 1px solid var(--border-subtle);
+                flex-direction: column;
+                padding: 24px;
+                gap: 18px;
+                display: none;
+            }
+
+            #nav-toggle:checked ~ .nav-links {
+                display: flex;
+            }
+
+            .nav-cta-desktop {
+                display: none;
+            }
+
+            .products-grid,
+            .apps-grid,
+            .tech-grid,
+            .pillars-grid,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .about-badge-card {
+                right: 16px;
+                bottom: 16px;
+            }
+
+            .contact-wrapper {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .section {
+                padding: 72px 0;
+            }
+
+            .team-grid,
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================================
+         A. STICKY NAVIGATION BAR
+         ====================================================================== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo" aria-label="NEXORA AI Home">
+                <div class="logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                NEXORA <span>AI</span>
+            </a>
+
+            <!-- Pure CSS Mobile Toggle -->
+            <input type="checkbox" id="nav-toggle" aria-label="Toggle Navigation Menu">
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="nav-links" aria-label="Primary Navigation">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#applications">Applications</a>
+                <a href="#technology">Technology</a>
+                <a href="#team">Team</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <a href="#contact" class="btn btn-primary btn-sm nav-cta-desktop">Get Started</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ======================================================================
+             B. HERO SECTION
+             ====================================================================== -->
+        <section id="home" class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-tag">
+                        <span>Next-Gen Artificial Intelligence Concept</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Building a Smarter Future with <span class="gradient-text">Artificial Intelligence</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Transforming ideas into intelligent solutions through next-generation AI technology.
+                    </p>
+                    <p class="hero-description">
+                        Discover how artificial intelligence is reshaping businesses, simplifying everyday tasks and creating new possibilities for the future.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#about" class="btn btn-primary">
+                            Explore Our AI
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#products" class="btn btn-secondary">Discover Products</a>
+                    </div>
+
+                    <!-- Illustrative Sample Statistics Cards -->
+                    <div class="hero-stats" aria-label="Illustrative Sample Metrics">
+                        <div class="stat-card">
+                            <div class="stat-value">10x</div>
+                            <div class="stat-label">Workflow Efficiency</div>
+                            <span class="stat-note">Illustrative sample metric</span>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">99.4%</div>
+                            <div class="stat-label">Pattern Precision</div>
+                            <span class="stat-note">Illustrative sample metric</span>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Intelligent Support</div>
+                            <span class="stat-note">Illustrative sample metric</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abstract AI Technology Illustration -->
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="ai-orb-container">
+                        <div class="glow-backdrop"></div>
+                        <div class="neural-ring ring-1"></div>
+                        <div class="neural-ring ring-2"></div>
+                        <div class="neural-ring ring-3"></div>
+
+                        <div class="floating-chip chip-top">
+                            <span class="chip-dot"></span>
+                            <span>Neural Architecture v4</span>
+                        </div>
+
+                        <div class="neural-core">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="url(#coreGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                                <defs>
+                                    <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#C4B5FD"/>
+                                        <stop offset="100%" stop-color="#06B6D4"/>
+                                    </linearGradient>
+                                </defs>
+                                <rect x="4" y="4" width="16" height="16" rx="3"/>
+                                <rect x="9" y="9" width="6" height="6" rx="1"/>
+                                <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>
+                            </svg>
+                            <span style="margin-top: 10px; font-family: var(--font-heading); font-size: 0.8rem; letter-spacing: 0.12em; color: #67E8F9;">NEXORA CORE</span>
+                        </div>
+
+                        <div class="floating-chip chip-bottom">
+                            <span class="chip-dot" style="background: #7C3AED; box-shadow: 0 0 10px #7C3AED;"></span>
+                            <span>Adaptive Deep Learning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             C. ABOUT THE COMPANY
+             ====================================================================== -->
+        <section id="about" class="section about-section">
+            <div class="container about-grid">
+                <div class="about-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="Abstract visualization of artificial intelligence neural pathways">
+                    <div class="about-badge-card">
+                        <strong>Conceptual Innovation</strong>
+                        <span>Designed to explore human-centric AI systems and future possibilities.</span>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <span class="section-badge">About NEXORA AI</span>
+                    <h2 class="section-title">Who We Are</h2>
+                    <p class="about-lead">
+                        NEXORA AI is a fictional AI technology company concept focused on exploring intelligent solutions that make technology more accessible, efficient and useful. Our vision is to demonstrate how AI can support businesses, individuals and communities.
+                    </p>
+
+                    <div class="pillars-grid">
+                        <div class="pillar-card">
+                            <h3>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                                Our Vision
+                            </h3>
+                            <p>To envision a future where intuitive artificial intelligence empowers every individual and organization to solve complex challenges effortlessly.</p>
+                        </div>
+
+                        <div class="pillar-card">
+                            <h3>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                Our Mission
+                            </h3>
+                            <p>To conceptualize ethical, transparent, and human-centered AI tools that streamline workflows and inspire creative discovery.</p>
+                        </div>
+                    </div>
+
+                    <div class="why-ai-box">
+                        <h3>Why AI Matters</h3>
+                        <p>Artificial intelligence bridges the gap between vast amounts of data and meaningful action—helping communities optimize resources, accelerate research, and unlock new forms of digital creativity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             D. AI PRODUCTS SECTION
+             ====================================================================== -->
+        <section id="products" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Product Concepts</span>
+                    <h2 class="section-title">Our AI Solutions</h2>
+                    <p class="section-subtitle">
+                        Explore our suite of conceptual artificial intelligence tools crafted to assist modern workflows, creative exploration, and intelligent decision-making.
+                    </p>
+                    <span class="demo-disclaimer">Note: Illustrative product concepts created for demonstration purposes</span>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 1: AI Chat Assistant -->
+                    <article class="product-card">
+                        <div>
+                            <div class="product-top">
+                                <div class="product-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="concept-tag">Concept 01</span>
+                            </div>
+                            <h3>AI Chat Assistant</h3>
+                            <p class="product-desc">
+                                An intelligent conversational companion designed to understand context, answer questions, and streamline daily digital communication.
+                            </p>
+                            <ul class="feature-list">
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Intelligent conversational assistance
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Natural-language interaction
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Everyday productivity support
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="#contact" class="btn btn-secondary btn-sm">Learn More</a>
+                        </div>
+                    </article>
+
+                    <!-- Product 2: AI Image Generator -->
+                    <article class="product-card">
+                        <div>
+                            <div class="product-top">
+                                <div class="product-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                </div>
+                                <span class="concept-tag">Concept 02</span>
+                            </div>
+                            <h3>AI Image Generator</h3>
+                            <p class="product-desc">
+                                A creative visual synthesis studio that transforms descriptive text prompts into inspiring digital artwork and design concepts.
+                            </p>
+                            <ul class="feature-list">
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Creative image generation
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Visual content exploration
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Rapid design assistance
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="#contact" class="btn btn-secondary btn-sm">Learn More</a>
+                        </div>
+                    </article>
+
+                    <!-- Product 3: Smart Data Analytics -->
+                    <article class="product-card">
+                        <div>
+                            <div class="product-top">
+                                <div class="product-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="20" x2="18" y2="10"/>
+                                        <line x1="12" y1="20" x2="12" y2="4"/>
+                                        <line x1="6" y1="20" x2="6" y2="14"/>
+                                    </svg>
+                                </div>
+                                <span class="concept-tag">Concept 03</span>
+                            </div>
+                            <h3>Smart Data Analytics</h3>
+                            <p class="product-desc">
+                                An analytical intelligence framework that uncovers hidden correlations in complex datasets and presents clear visual takeaways.
+                            </p>
+                            <ul class="feature-list">
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Actionable data insights
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Automated pattern identification
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Strategic decision-support concepts
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="#contact" class="btn btn-secondary btn-sm">Learn More</a>
+                        </div>
+                    </article>
+
+                    <!-- Product 4: AI Automation -->
+                    <article class="product-card">
+                        <div>
+                            <div class="product-top">
+                                <div class="product-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                    </svg>
+                                </div>
+                                <span class="concept-tag">Concept 04</span>
+                            </div>
+                            <h3>AI Automation</h3>
+                            <p class="product-desc">
+                                Smart orchestration pipelines designed to handle repetitive operational tasks so teams can focus on high-impact innovation.
+                            </p>
+                            <ul class="feature-list">
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Intelligent workflow automation
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Repetitive task assistance
+                                </li>
+                                <li>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    Measurable productivity improvement
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="#contact" class="btn btn-secondary btn-sm">Learn More</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             E. AI APPLICATIONS SECTION
+             ====================================================================== -->
+        <section id="applications" class="section applications-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Industry Impact</span>
+                    <h2 class="section-title">AI Transforming Industries</h2>
+                    <p class="section-subtitle">
+                        Discover how artificial intelligence concepts can be applied across vital global sectors to solve real-world challenges.
+                    </p>
+                </div>
+
+                <div class="apps-grid">
+                    <!-- 1. Healthcare -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3>Healthcare</h3>
+                        <p>Assisting medical research, diagnostic imaging analysis, and patient care coordination through intelligent data synthesis.</p>
+                    </div>
+
+                    <!-- 2. Education -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <h3>Education</h3>
+                        <p>Enabling personalized learning pathways, interactive tutoring assistance, and accessible educational resources for students.</p>
+                    </div>
+
+                    <!-- 3. Finance -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Finance</h3>
+                        <p>Enhancing real-time fraud detection, anomaly monitoring, and predictive financial data analysis for safer transactions.</p>
+                    </div>
+
+                    <!-- 4. Business -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <h3>Business</h3>
+                        <p>Driving operational workflow optimization, intelligent customer support, and smart resource allocation across teams.</p>
+                    </div>
+
+                    <!-- 5. Transportation -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                            </svg>
+                        </div>
+                        <h3>Transportation</h3>
+                        <p>Powering dynamic route optimization, traffic flow modeling, and intelligent mobility systems for safer transit.</p>
+                    </div>
+
+                    <!-- 6. Agriculture -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                            </svg>
+                        </div>
+                        <h3>Agriculture</h3>
+                        <p>Supporting precision crop monitoring, soil health diagnostics, and sustainable agricultural yield analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             F. TECHNOLOGY SECTION
+             ====================================================================== -->
+        <section id="technology" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Core AI Domains</span>
+                    <h2 class="section-title">Technology Behind Intelligence</h2>
+                    <p class="section-subtitle">
+                        An overview of the foundational artificial intelligence disciplines that inspire modern intelligent systems.
+                    </p>
+                </div>
+
+                <div class="tech-grid">
+                    <!-- Machine Learning -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                                </svg>
+                            </div>
+                            <h3>Machine Learning</h3>
+                        </div>
+                        <p>Algorithms that learn patterns from historical data to make predictions and improve accuracy over time without explicit reprogramming.</p>
+                    </div>
+
+                    <!-- Deep Learning -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                </svg>
+                            </div>
+                            <h3>Deep Learning</h3>
+                        </div>
+                        <p>Multi-layered artificial neural networks modeled after the human brain to process complex, high-dimensional representations.</p>
+                    </div>
+
+                    <!-- Natural Language Processing -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                </svg>
+                            </div>
+                            <h3>Natural Language Processing</h3>
+                        </div>
+                        <p>Computational linguistics enabling systems to comprehend, interpret, translate, and generate human language naturally.</p>
+                    </div>
+
+                    <!-- Computer Vision -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </div>
+                            <h3>Computer Vision</h3>
+                        </div>
+                        <p>Visual recognition models that extract meaningful information from digital images, video streams, and spatial environments.</p>
+                    </div>
+
+                    <!-- Generative AI -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/>
+                                </svg>
+                            </div>
+                            <h3>Generative AI</h3>
+                        </div>
+                        <p>Foundation models capable of synthesizing original text, imagery, code, and structured concepts from learned distributions.</p>
+                    </div>
+
+                    <!-- Data Analytics -->
+                    <div class="tech-card">
+                        <div class="tech-header">
+                            <div class="tech-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                                </svg>
+                            </div>
+                            <h3>Data Analytics</h3>
+                        </div>
+                        <p>Statistical modeling and scalable data pipelines that transform raw information into structured, verifiable intelligence.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             G. TEAM SECTION
+             ====================================================================== -->
+        <section id="team" class="section team-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">Leadership Concept</span>
+                    <h2 class="section-title">Meet Our Team</h2>
+                    <p class="section-subtitle">
+                        The multidisciplinary innovators guiding our conceptual vision for accessible and responsible artificial intelligence.
+                    </p>
+                    <span class="demo-disclaimer">Fictional demonstration profiles — not real company employees</span>
+                </div>
+
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <article class="team-card">
+                        <div class="team-img-wrap">
+                            <span class="team-badge">Demo Profile</span>
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Portrait of Elena Rostova, Fictional Chief AI Architect">
+                        </div>
+                        <div class="team-info">
+                            <h3>Elena Rostova</h3>
+                            <span class="team-role">Chief AI Architect (Sample)</span>
+                            <p class="team-bio">Specializes in neural architecture design and human-centered machine learning frameworks.</p>
+                            <div class="social-links" aria-label="Social Media Placeholders">
+                                <a href="#team" aria-label="LinkedIn Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                                <a href="#team" aria-label="GitHub Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 2 -->
+                    <article class="team-card">
+                        <div class="team-img-wrap">
+                            <span class="team-badge">Demo Profile</span>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Portrait of Marcus Vance, Fictional Lead ML Researcher">
+                        </div>
+                        <div class="team-info">
+                            <h3>Marcus Vance</h3>
+                            <span class="team-role">Lead ML Researcher (Sample)</span>
+                            <p class="team-bio">Focuses on natural language understanding, conversational systems, and model efficiency.</p>
+                            <div class="social-links" aria-label="Social Media Placeholders">
+                                <a href="#team" aria-label="LinkedIn Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                                <a href="#team" aria-label="GitHub Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 3 -->
+                    <article class="team-card">
+                        <div class="team-img-wrap">
+                            <span class="team-badge">Demo Profile</span>
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Portrait of Sophia Lin, Fictional Head of Product Design">
+                        </div>
+                        <div class="team-info">
+                            <h3>Sophia Lin</h3>
+                            <span class="team-role">Head of Product Design (Sample)</span>
+                            <p class="team-bio">Crafts intuitive interfaces that make complex artificial intelligence tools simple and approachable.</p>
+                            <div class="social-links" aria-label="Social Media Placeholders">
+                                <a href="#team" aria-label="LinkedIn Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                                <a href="#team" aria-label="GitHub Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Team Member 4 -->
+                    <article class="team-card">
+                        <div class="team-img-wrap">
+                            <span class="team-badge">Demo Profile</span>
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80" alt="Portrait of David Kalu, Fictional Data Systems Director">
+                        </div>
+                        <div class="team-info">
+                            <h3>David Kalu</h3>
+                            <span class="team-role">Data Systems Director (Sample)</span>
+                            <p class="team-bio">Architects scalable data pipelines, ethical governance models, and real-time analytics engines.</p>
+                            <div class="social-links" aria-label="Social Media Placeholders">
+                                <a href="#team" aria-label="LinkedIn Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                                <a href="#team" aria-label="GitHub Placeholder">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             H. CONTACT SECTION
+             ====================================================================== -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <span class="section-badge">Get In Touch</span>
+                        <h2>Let's Build the Future Together</h2>
+                        <p>
+                            Have questions about our AI concepts, academic design showcase, or potential collaborations? Reach out using the form and we will connect with you.
+                        </p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Email Inquiry</h4>
+                                    <span>hello@nexora-ai.example</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Innovation Hub (Concept)</h4>
+                                    <span>Suite 400, Digital Frontier Park</span>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </div>
+                                <div>
+                                    <h4>Availability</h4>
+                                    <span>Monday – Friday, 9:00 AM – 6:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form" action="#contact" method="get">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="full-name">Full Name</label>
+                                <input type="text" id="full-name" name="full-name" class="form-control" placeholder="Alex Mercer" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="alex@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Exploring AI Solutions" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project idea or inquiry..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Send Message
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================================================================
+         FOOTER
+         ====================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="logo">
+                        <div class="logo-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        NEXORA <span>AI</span>
+                    </a>
+                    <p>
+                        A conceptual AI technology showcase built with pure HTML5 and CSS3, demonstrating clean web architecture and modern UI/UX design.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">AI Products</a></li>
+                        <li><a href="#applications">Applications</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="#technology">Machine Learning</a></li>
+                        <li><a href="#technology">Deep Learning</a></li>
+                        <li><a href="#technology">Computer Vision</a></li>
+                        <li><a href="#technology">Generative AI</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#about">Vision &amp; Mission</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 NEXORA AI Concept. Crafted using pure HTML5 &amp; CSS3.</span>
+                <span>Fictional company concept for educational &amp; portfolio demonstration.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
